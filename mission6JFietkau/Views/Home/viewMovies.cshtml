@@ -19,20 +19,32 @@
             <th>Edited</th>
             <th>Lent To</th>
             <th>Notes</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var movie in Model)
         {
             <tr>
-                <td>@movie.category</td>
-                <td>@movie.title</td>
-                <td>@movie.year</td>
-                <td>@movie.director</td>
-                <td>@movie.rating</td>
-                <td>@movie.edited</td>
-                <td>@movie.lent_to</td>
-                <td>@movie.notes</td>
+                <td>@(movie.Category?.CategoryName ?? "No Category")</td>
+                <td>@movie.Title</td>
+                <td>@movie.Year</td>
+                <td>@movie.Director</td>
+                <td>@movie.Rating</td>
+                <td>@movie.Edited</td>
+                <td>@movie.LentTo</td>
+                <td>@movie.Notes</td>
+                <td>
+                    <!-- Edit button/link -->
+                    <a asp-action="addMovie" asp-route-id="@movie.MovieId" class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <!-- Delete button/link -->
+                    <form asp-action="DeleteMovie" asp-route-id="@movie.MovieId" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
